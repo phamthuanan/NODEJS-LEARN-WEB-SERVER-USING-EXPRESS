@@ -3,7 +3,9 @@ const app = express();
 
 const port = 3001;
 
-
+var users =[{id: 1, name: 'Thuan An'},
+			{id: 2, name: 'Hung Si'},
+			{id: 3, name: 'Thai Bao'}]
 app.set('view engine', 'pug')
 app.set('views', './views')
 app.get('/', (req, res) => {
@@ -13,11 +15,19 @@ app.get('/', (req, res) => {
 app.get('/user',(req ,res) =>{
 	res.render('./user/user',
 		{
-			users: [{id: 1, name: 'Thuan An'},
-					{id: 2, name: 'Hung Si'},
-					{id: 3, name: 'Thai Bao'}]
+			users: users
 		}
 		)
 })
+
+app.get('/user/search', (req, res)=>{
+	var search = req.query.q;
+	var userSearch = users.filter(function(user){
+		return user.name.toLowerCase().indexOf(search.toLowerCase()) !==-1
+	})
+	res.render('./user/user', {users: userSearch, search: req.query.q })
+}
+
+)
 
 app.listen(port, () => {console.log('Example app listening at http://localhost:' + port)});
