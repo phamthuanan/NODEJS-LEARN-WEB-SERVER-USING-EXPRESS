@@ -1,13 +1,18 @@
 const express = require("express");
 const bodyParser = require('body-parser')
-const app = express();
-
+const low = require('lowdb')
 
 const port = 3001;
+const app = express();
 
-var users = [{id: 1, name: 'Thuan An'},
-			{id: 2, name: 'Hung Si'},
-			{id: 3, name: 'Thai Bao'}]
+const FileSync = require('lowdb/adapters/FileSync')
+const adapter = new FileSync('db.json')
+const db = low(adapter)
+
+
+
+db.defaults({ users: []})
+  .write()
 
 app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
@@ -20,14 +25,14 @@ app.get('/', (req, res) => {
 
 app.get('/user',(req ,res) =>{
 	res.render('./user/user',
-		{ users: users })
+		{ users: db.get('users').value()})
 })
 
 app.get('/user/search', (req, res) => {
 	var search = req.query.q;
-	var userSearch = users.filter(function(user){
+	var userSearch = db.get('users').value().filter(function(user){
 		return user.name.toLowerCase().indexOf(search.toLowerCase()) !==-1 })
-	res.render('./user/user', {users: userSearch, search: req.query.q })
+	res.render('./user/user', {users: userSearch })
 })
 
 app.get('/user/create', (req, res) =>{
@@ -35,7 +40,7 @@ app.get('/user/create', (req, res) =>{
 })
 
 app.post('/user/create', (req,res) =>{
-	users.push(req.body)
+	db.get('users').push(req.body).write()
 	res.redirect('/user')
 })
 app.listen(port, () => {console.log('Example app listening at http://localhost:' + port)});
