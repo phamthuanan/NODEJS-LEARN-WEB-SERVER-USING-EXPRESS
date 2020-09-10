@@ -16,5 +16,7 @@ app.get('/', (req, res) => {
   res.render('index');
 })
 
+app.use(express.static('public'))
+
 app.use('/user',usersRoutes )
 app.listen(port, () => {console.log('Example app listening at http://localhost:' + port)});

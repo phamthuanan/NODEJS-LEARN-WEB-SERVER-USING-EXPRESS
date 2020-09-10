@@ -1,0 +1,7 @@
+extends ../layout/common
+
+block content
+	h2 Search Result
+	ul
+		each user in users
+			li= user.name

@@ -1,0 +1,27 @@
+html
+	head
+		link( rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" , integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z", crossorigin="anonymous")
+	body
+		nav.navbar.navbar-expand-lg.navbar-light.bg-light
+			a.navbar-brand(href='#')
+				img.d-inline-block.align-top(src='/images/logo.png', width='200', height='100', alt='logo', loading='lazy')
+			button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+				span.navbar-toggler-icon
+			#navbarSupportedContent.collapse.navbar-collapse
+				ul.navbar-nav.mr-auto
+					li.nav-item.active
+						a.nav-link(href='/')
+							| Home 
+							span.sr-only (current)
+					li.nav-item
+						a.nav-link(href='/user/create') Create User
+					li.nav-item
+						a.nav-link(href='/user') View User
+			form.form-inline.my-2.my-lg-0(action='/user/search' method='GET')
+				input.form-control.mr-sm-2(type='search', placeholder='Search', aria-label='Search' name ='q' )
+				button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
+  
+  
+
+			    
+		block content
