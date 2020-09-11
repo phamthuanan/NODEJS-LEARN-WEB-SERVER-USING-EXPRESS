@@ -26,6 +26,7 @@ module.exports.getUserById = (req,res) => {
 }
 
 module.exports.postCreateUser = (req,res) =>{
+	
 	req.body.id = shortid.generate();
 	db.get('users').push(req.body).write()
 	res.redirect('/user')
