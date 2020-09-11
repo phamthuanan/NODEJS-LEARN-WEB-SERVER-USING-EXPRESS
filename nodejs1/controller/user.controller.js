@@ -16,6 +16,7 @@ module.exports.search = (req, res) => {
 }
 
 module.exports.get = (req, res) => {
+	console.log(req.cookies)
 	res.render('./user/creat_user')
 }
 
@@ -30,5 +31,10 @@ module.exports.postCreateUser = (req,res) =>{
 	req.body.id = shortid.generate();
 	db.get('users').push(req.body).write()
 	res.redirect('/user')
+}
+
+module.exports.cookie = (req,res) => {
+	res.cookie('user-id', 123)
+	res.send('Hello')
 }
 

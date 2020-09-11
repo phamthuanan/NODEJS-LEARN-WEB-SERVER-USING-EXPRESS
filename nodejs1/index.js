@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require('body-parser')
+var cookieParser = require('cookie-parser')
 
 const usersRoutes = require("./routes/users.routes")
 
@@ -9,6 +10,7 @@ const app = express();
 
 app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use(cookieParser())
 
 app.set('view engine', 'pug')
 app.set('views', './views')

@@ -11,7 +11,7 @@ module.exports.validate = (req, res, next) => {
 	if(errors.length){
 		res.render('./user/creat_user', {
 			errors: errors,
-			values : req.body
+			values: req.body
 		})
 		return;
 	}

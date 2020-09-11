@@ -8,6 +8,8 @@ router.get('/', userController.index)
 
 router.get('/search', userController.search)
 
+router.get('/cookie', userController.cookie)
+
 router.get('/create', userController.get)
 
 router.get('/:id', userController.getUserById)
