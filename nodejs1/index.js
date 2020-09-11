@@ -3,7 +3,8 @@ const bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
 
 const usersRoutes = require("./routes/users.routes")
-
+const authenLogin = require('./routes/auth.routes')
+const middleware = require('./middleware/middleware')
 const port = 3001;
 const app = express();
 
@@ -20,5 +21,7 @@ app.get('/', (req, res) => {
 
 app.use(express.static('public'))
 
-app.use('/user',usersRoutes )
+app.use('/user',middleware.middleware,usersRoutes )
+app.use('/auth', authenLogin)
+
 app.listen(port, () => {console.log('Example app listening at http://localhost:' + port)});
