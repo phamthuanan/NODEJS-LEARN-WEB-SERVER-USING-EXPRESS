@@ -5,6 +5,7 @@ block content
 	ul
 		each user in users
 			li 
+				img(src= user.avatar, width='30px')
 				span= user.name
 				span &nbsp
 				a(href='/user/'+ user.id) View User 

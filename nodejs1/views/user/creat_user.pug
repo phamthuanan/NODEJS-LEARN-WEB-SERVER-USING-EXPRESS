@@ -5,10 +5,12 @@ block content
 			.alert.alert-danger= error
 	
 	h1 Create user
-	form(action='/user/create' method = 'POST')
+	form(action='/user/create' method = 'POST' enctype="multipart/form-data" )
 		.form-group
 			label Name User
 			input.form-control(name='name' type='text' value = values ? values.name : '')
 			label Phone
 			input.form-control(name='phone' type='text' value = values ? values.phone : '')
+			label Avatar
+			input.form-control(name='avatar' type='file')
 			button.btn.btn-primary.mt-2 Create
