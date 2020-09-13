@@ -700,5 +700,19 @@
       "images": "https://loremflickr.com/320/240/dog",
       "description": "vestibulum sit amet cursus id turpis integer aliquet massa id lobortis convallis tortor risus dapibus augue vel accumsan tellus nisi"
     }
+  ],
+  "session": [
+    {
+      "id": "AbTunzm6a",
+      "cart": {
+        "3080f9c0-c61a-49e7-956b-de7f9f741935": 7,
+        "d81dd333-2be2-4858-93c0-f924e1288366": 2,
+        "8daededc-8010-4041-a4c8-b6a7e46c7ef7": 13,
+        "0ab7da37-9234-4a6d-8b24-e2ed6ee9059f": 1,
+        "8d68ddd4-2f8b-4de7-92ce-0bd1b4579c8d": 2,
+        "72a9f57e-35e5-4be9-a8d6-ea47e35723e3": 1,
+        "762e9d78-4bdb-470b-94eb-c603b90053de": 1
+      }
+    }
   ]
 }
