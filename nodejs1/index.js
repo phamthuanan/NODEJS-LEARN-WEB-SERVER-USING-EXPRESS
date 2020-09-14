@@ -2,6 +2,8 @@ require('dotenv').config()
 const express = require("express");
 const bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/express-demo', {useNewUrlParser: true});
 
 const usersRoutes = require("./routes/users.routes")
 const authenLogin = require('./routes/auth.routes')

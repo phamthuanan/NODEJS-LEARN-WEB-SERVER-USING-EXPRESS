@@ -1,17 +1,19 @@
 
 const shortid = require('shortid')
-var db = require('../db')
+const User = require('../models/user.model')
 
-module.exports.index = (req ,res) => {
+module.exports.index = async (req ,res) => {
+
+	var users = await User.find()
 	res.render('./user/user',
-		{ users: db.get('users').value()
+		{ 
+			users: users
 	})
 }
 
-module.exports.search = (req, res) => {
+module.exports.search = async (req, res) => {
 	var search = req.query.q;
-	var userSearch = db.get('users').value().filter(function(user){
-		return user.name.toLowerCase().indexOf(search.toLowerCase()) !==-1 })
+	var userSearch = await User.find({$or : [{ name : {'$regex': search.toUpperCase()}}, { name : {'$regex': search.toLowerCase()}}]})
 	res.render('./user/search', {users: userSearch })
 }
 
@@ -20,17 +22,20 @@ module.exports.get = (req, res) => {
 	res.render('./user/creat_user')
 }
 
-module.exports.getUserById = (req,res) => {
+module.exports.getUserById = async (req,res) => {
 	var id = req.params.id;
-	var user = db.get('users').find({ id: id }).value();
+	var user = await User.findById(id)
 	res.render('user/view', { users: user})
 }
 
 module.exports.postCreateUser = (req,res) =>{
+
+	var avatar = 'uploads/' + req.file.filename
+	var user = new User({ name: req.body.name, phone: req.body.phone, avatar: avatar });
+	user.save(function (err) {
+	  if (err) return handleError(err);
+	});
 	
-	req.body.id = shortid.generate();
-	req.body.avatar = 'uploads/' + req.file.filename
-	db.get('users').push(req.body).write()
 	res.redirect('/user')
 }
 

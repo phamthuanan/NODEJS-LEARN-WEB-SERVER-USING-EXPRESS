@@ -1,5 +1,5 @@
 const shortid = require('shortid')
-const db = require("../db")
+var Session = require('../models/session.model')
 
 module.exports = (req, res, next) =>{
 
@@ -7,11 +7,15 @@ module.exports = (req, res, next) =>{
 		var sessionId = shortid.generate();
 		res.cookie('sessionId', sessionId,{
 		signed: true
-	});
+		});
 
-		db.get('session').push({
-			'id': sessionId
-		}).write()
+		var session = new Session({
+			_id: sessionId
+		})
+
+		session.save(function (err) {
+	  		if (err) return handleError(err);
+		});
 	}
 	
 	next()
